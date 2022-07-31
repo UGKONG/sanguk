@@ -1,23 +1,31 @@
-import "../styles/reset.scss";
+import { createContext, useState } from "react";
 import styled from "styled-components";
 import Head from "../components/Head";
 import Navigation from "../components/Navigation";
 import Header from "../components/Header";
+import "../styles/reset.scss";
+
+export const Store = createContext(null);
 
 export default function App({ Component, pageProps }) {
+  const [title, setTitle] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+
   return (
-    <>
+    <Store.Provider value={{ title, setTitle, searchValue, setSearchValue }}>
       <Head />
       <Container>
         <Navigation />
         <Contents>
           <Header />
           <Body>
-            <Component {...pageProps} />
+            <BodyContainer>
+              <Component {...pageProps} />
+            </BodyContainer>
           </Body>
         </Contents>
       </Container>
-    </>
+    </Store.Provider>
   );
 }
 
@@ -38,4 +46,14 @@ const Contents = styled.section`
 const Body = styled.div`
   flex: 1;
   padding: 0 20px 20px;
+`;
+const BodyContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+  overflow: auto;
+  background-color: #ffffff;
+  border: 1px solid #eeeeee;
 `;

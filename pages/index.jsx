@@ -1,3 +1,10 @@
+import { useContext, useEffect } from "react";
+import { Store } from "./_app";
+
 export default function Home() {
-  return <div>메인 페이지</div>;
+  const { setTitle } = useContext(Store);
+
+  useEffect(() => setTitle("소개"), [setTitle]);
+
+  return <div>이름: 전상욱</div>;
 }

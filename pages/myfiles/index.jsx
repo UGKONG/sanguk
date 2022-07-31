@@ -1,3 +1,10 @@
+import { useContext, useEffect } from "react";
+import { Store } from "../_app";
+
 export default function MyFiles() {
-  return <div>파일 리스트</div>;
+  const { setTitle } = useContext(Store);
+
+  useEffect(() => setTitle("내파일"), [setTitle]);
+
+  return <div></div>;
 }

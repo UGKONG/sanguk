@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import Link from "next/link";
 import styled from "styled-components";
 import { useRouter } from "next/router";
@@ -9,6 +10,7 @@ import {
   IoSettingsOutline,
 } from "react-icons/io5";
 import { BsQuestion } from "react-icons/bs";
+import DateTimeContainer from "./DateTimeContainer";
 
 export default function Navigation__() {
   const router = useRouter();
@@ -19,11 +21,11 @@ export default function Navigation__() {
     { id: 4, name: "Setting", href: "/setting" },
   ]);
 
-  const path = useMemo(() => router?.pathname, [router]);
+  const path = useMemo(() => {
+    return router?.pathname;
+  }, [router]);
   const activeClass = useCallback(
-    (href) => {
-      return path === href ? "active" : "";
-    },
+    (href) => (path === href ? "active" : ""),
     [path]
   );
   const mainNavigate = () => {
@@ -32,7 +34,11 @@ export default function Navigation__() {
 
   return (
     <Nav>
-      <Logo onClick={mainNavigate}>포트폴리오</Logo>
+      <Logo onClick={mainNavigate}>
+        전상욱
+        <br />
+        포트폴리오
+      </Logo>
       <MenuContainer>
         {menuList?.current?.map((item) => (
           <Link key={item?.id} href={item?.href}>
@@ -53,6 +59,7 @@ export default function Navigation__() {
           </Link>
         ))}
       </MenuContainer>
+      <DateTimeContainer />
     </Nav>
   );
 }
@@ -62,6 +69,7 @@ const Nav = styled.nav`
   height: 100%;
   background-color: #343951;
   overflow: hidden;
+  position: relative;
 `;
 const Logo = styled.h1`
   width: 100%;
@@ -69,9 +77,11 @@ const Logo = styled.h1`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   margin-bottom: 10px;
   color: #ffffff;
   letter-spacing: 3px;
+  user-select: none;
   cursor: pointer;
 `;
 const MenuContainer = styled.div`

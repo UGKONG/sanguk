@@ -1,10 +1,10 @@
 import { useContext, useEffect } from "react";
 import { Store } from "../_app";
 
-export default function Dictionary() {
+export default function MyFiles() {
   const { setTitle } = useContext(Store);
 
-  useEffect(() => setTitle("용어사전"), [setTitle]);
+  useEffect(() => setTitle("검색"), [setTitle]);
 
   return <div></div>;
 }
