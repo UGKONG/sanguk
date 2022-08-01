@@ -46,6 +46,7 @@ const Contents = styled.section`
 const Body = styled.div`
   flex: 1;
   padding: 0 20px 20px;
+  overflow: auto;
 `;
 const BodyContainer = styled.div`
   width: 100%;
@@ -56,4 +57,6 @@ const BodyContainer = styled.div`
   overflow: auto;
   background-color: #ffffff;
   border: 1px solid #eeeeee;
+  display: flex;
+  flex-wrap: wrap;
 `;

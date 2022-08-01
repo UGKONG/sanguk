@@ -29,7 +29,7 @@ export default function DateTimeContainer_() {
 const Container = styled.div`
   position: absolute;
   border-radius: 8px;
-  bottom: -8px;
+  bottom: -14px;
   left: 50%;
   transform: translate(-50%);
   width: 80%;
