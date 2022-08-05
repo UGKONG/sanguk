@@ -1,0 +1,8 @@
+{
+  "host": "db.sanguk.gabia.io",
+  "user": "sanguk",
+  "password": "dkfhqufdl1@",
+  "database": "dbsanguk",
+  "dateStrings": true,
+  "multipleStatements": true
+}

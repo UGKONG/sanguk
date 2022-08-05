@@ -66,6 +66,7 @@ export default function Navigation__() {
 
 const Nav = styled.nav`
   width: 230px;
+  min-width: 230px;
   height: 100%;
   background-color: #343951;
   overflow: hidden;
