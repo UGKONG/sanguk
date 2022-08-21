@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Store } from "../_app";
 import Item from "./Item";
 import useAxios from "../../hooks/useAxios";
+import Directory from "./Directory";
 
 export default function MyFiles() {
   const { setTitle } = useContext(Store);
@@ -18,15 +19,17 @@ export default function MyFiles() {
 
   return (
     <Container>
-      <span>{depsHistory?.map((item) => item?.NAME + " -> ")} </span>
-      {list?.map((item) => (
-        <Item
-          key={item?.ID}
-          data={item}
-          getList={getList}
-          setDepsHistory={setDepsHistory}
-        />
-      ))}
+      <Directory list={depsHistory} getList={getList} />
+      <ItemList>
+        {list?.map((item) => (
+          <Item
+            key={item?.ID}
+            data={item}
+            getList={getList}
+            setDepsHistory={setDepsHistory}
+          />
+        ))}
+      </ItemList>
     </Container>
   );
 }
@@ -34,4 +37,7 @@ export default function MyFiles() {
 const Container = styled.section`
   overflow: auto;
   flex: 1;
+`;
+const ItemList = styled.section`
+  padding: 10px 0;
 `;

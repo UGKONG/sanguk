@@ -99,6 +99,7 @@ const MenuItem = styled.a`
   color: #777777;
   font-weight: 600;
   letter-spacing: 1px;
+  user-select: none;
   cursor: pointer;
   & > svg {
     width: 20px;

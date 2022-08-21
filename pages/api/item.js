@@ -6,7 +6,10 @@ db.connect();
 export default function handler(req, res) {
   const id = req?.query?.id ?? 0;
   const sql = `
-    SELECT * FROM tn_item WHERE PARENT_ID = ${id};
+    SELECT a.*, b.NAME AS TYPE_NAME
+    FROM tn_item a
+    LEFT JOIN tn_common b ON b.BASE_CODE = 1 AND a.TYPE = b.CODE
+    WHERE PARENT_ID = ${id};
   `;
 
   db.query(sql, (err, result) => {
