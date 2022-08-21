@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import styled from "styled-components";
 import { FcFolder, FcFile, FcLink } from "react-icons/fc";
 
-export default function Item({ data, getList, setDepsHistory }) {
+export default function Item({ data, setDepsHistory }) {
   const [isActive, setIsActive] = useState(false);
   const isFolder = useMemo(() => data?.TYPE === 1, [data?.TYPE]);
   const isFile = useMemo(() => data?.TYPE === 2, [data?.TYPE]);
@@ -19,16 +19,13 @@ export default function Item({ data, getList, setDepsHistory }) {
 
   const folderAction = () => {
     console.log("이것은 폴더입니다.");
-    getList(data?.ID);
     setDepsHistory((prev) => [...prev, { ID: data?.ID, NAME: data?.NAME }]);
   };
   const fileAction = () => {
     console.log("이것은 파일입니다.");
   };
   const urlAction = () => {
-    console.log("이것은 링크입니다.");
-    const isHttp = data?.NAME?.indexOf("http") > -1;
-    window.open(isHttp ? data?.NAME : "http://" + data?.NAME);
+    window.open(data?.URL);
   };
 
   const iconStyle = useMemo(
@@ -40,12 +37,19 @@ export default function Item({ data, getList, setDepsHistory }) {
     []
   );
 
+  const itemDrag = (e) => {
+    // e.preventDefault();
+    console.log(e);
+  };
+
   return (
     <Container
       isActive={isActive}
       title={data?.NAME}
-      onClick={onClick}
+      onMouseDown={onClick}
       onDoubleClick={onDoubleClick}
+      onDragStart={itemDrag}
+      onDrag={itemDrag}
     >
       {/* 아이콘 */}
       {isFolder && <FcFolder style={iconStyle} />}
@@ -67,10 +71,10 @@ const Container = styled.article`
   justify-content: space-between;
   padding: 10px;
   margin-bottom: 4px;
-  cursor: default;
   user-select: none;
   font-size: 13px;
   color: #444444;
+  cursor: default;
   background: ${(x) => (x?.isActive ? "#eee !important" : "transparent")};
   &:hover {
     background: #f8f8f8;
